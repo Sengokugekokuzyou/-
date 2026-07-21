@@ -1,6 +1,14 @@
-"""Publisher (§28). Phase 1 exports locally only; YouTube modes land in Phase 5.
+"""Publisher (§28): local export, YouTube private/unlisted/scheduled upload.
 
-Publish modes (config/publishing.yaml): local_only | private | unlisted | scheduled.
-Only Quality-Gate PASS videos may ever be scheduled (§28). This module is a
-placeholder in v0.1 — the local export is handled by the render job itself.
+Only a Quality-Gate PASS video may be scheduled/uploaded (enforced by the
+orchestrator, not here). Never defaults to public.
 """
+from .base import Publisher, PublishRequest, PublishError, build_video_body
+from .local import LocalPublisher
+from .youtube import YouTubePublisher
+from .factory import get_publisher, privacy_for_mode
+
+__all__ = [
+    "Publisher", "PublishRequest", "PublishError", "build_video_body",
+    "LocalPublisher", "YouTubePublisher", "get_publisher", "privacy_for_mode",
+]

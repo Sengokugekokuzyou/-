@@ -63,6 +63,23 @@ python -m gcl.cli tts \
 Offline (no engine): add `--tts-provider mock` / `--provider mock`. See
 [`docs/TTS_SUBTITLES.md`](docs/TTS_SUBTITLES.md).
 
+### Full automation (produce → schedule)
+
+One command runs the whole chain and schedules a 予約投稿 (PASS-gated, never
+instant-public):
+
+```bash
+python -m gcl.cli auto \
+  --experiment content/experiments/food_shortage_glen.yaml \
+  --telemetry  workspace/telemetry/sample_north_forest.jsonl \
+  --frames     <game>/field_screenshots/gcl_video \
+  --mode       scheduled
+```
+
+Run it nightly via Task Scheduler for hands-off operation — see
+[`docs/AUTOMATION.md`](docs/AUTOMATION.md) and
+[`docs/YOUTUBE_WORKFLOW.md`](docs/YOUTUBE_WORKFLOW.md) (one-time free OAuth).
+
 ## Layout
 
 | Path | What |
@@ -88,7 +105,8 @@ Offline (no engine): add `--tts-provider mock` / `--provider mock`. See
 - [`docs/REPLAY_DESIGN.md`](docs/REPLAY_DESIGN.md) — re-shoot strategy (§17)
 - [`docs/BGM_MV_SPEC.md`](docs/BGM_MV_SPEC.md) — BGM music video pipeline (§8–11)
 - [`docs/QUALITY_GATE.md`](docs/QUALITY_GATE.md) — checks & verdicts (§27)
-- [`docs/YOUTUBE_WORKFLOW.md`](docs/YOUTUBE_WORKFLOW.md) — publishing (§28)
+- [`docs/AUTOMATION.md`](docs/AUTOMATION.md) — the unattended produce→schedule loop
+- [`docs/YOUTUBE_WORKFLOW.md`](docs/YOUTUBE_WORKFLOW.md) — publishing + OAuth (§28)
 - [`docs/CONFIG_REFERENCE.md`](docs/CONFIG_REFERENCE.md) — every config key
 
 ## Constraints honored

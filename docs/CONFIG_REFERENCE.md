@@ -38,6 +38,11 @@ code.
 | `mode` | local_only | Publish mode; never auto-public by default (§28). |
 | `allowed_modes` | list | local_only/private/unlisted/scheduled. |
 | `steam_url` | Steam URL | CTA link. |
+| `youtube.client_secret_path` | config/youtube_client_secret.json | OAuth client JSON (gitignored). |
+| `youtube.token_path` | config/youtube_token.json | Cached refresh token (gitignored). |
+| `youtube.default_tags` | list | Tags applied on upload. |
+| `schedule.time_utc` | "10:00" | Daily slot for `auto --mode scheduled` (~19:00 JST). |
+| `schedule.min_lead_hours` | 12 | Earliest a scheduled video may go live from now. |
 | `cadence.*` | see file | Recommended per-format frequency (§12). |
 | `prevent_same_day_publish` | true | No two publishes same day (§12). |
 | `playlists.*` | see file | Series → playlist names. |

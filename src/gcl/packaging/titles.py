@@ -67,7 +67,33 @@ def title_candidates(
         ],
     }
 
-    ordered = [fmt for fmt in FORMATS if fmt not in avoid_formats] + list(avoid_formats)
+    return _round_robin(bank, FORMATS, avoid_formats, n)
+
+
+def english_title_candidates(
+    candidate: StoryCandidate,
+    *,
+    question_en: str = "",
+    avoid_formats: tuple[str, ...] = (),
+    n: int = 10,
+) -> list[dict]:
+    """EN title candidates (§25 wants 10 EN titles too). Facts-only fills."""
+    f = _facts(candidate)
+    days, loc = f["days"], f["location"]
+    q = question_en or f"What Happened in {loc}?"
+    bank: dict[str, list[str]] = {
+        "question": [q, f"What Becomes of {loc}?"],
+        "result": [f"How It Ended in {loc}", f"The Fate of {loc}, on Record"],
+        "time": [f"{days} Days in {loc}", f"{loc}, in {days} Days"],
+        "person": ["One Villager's Record", f"What Happened to {f['who']}"],
+        "conflict": [f"The Conflict That Shook {loc}", f"What Sparked the Strife in {loc}"],
+        "change": [f"How {loc} Changed", f"Tracing {days} Days of Change"],
+    }
+    return _round_robin(bank, FORMATS, avoid_formats, n)
+
+
+def _round_robin(bank, formats, avoid_formats, n):
+    ordered = [fmt for fmt in formats if fmt not in avoid_formats] + list(avoid_formats)
     out: list[dict] = []
     # Round-robin across formats so the top candidates are format-diverse.
     idx = 0

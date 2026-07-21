@@ -36,6 +36,10 @@ class AssembleSpec:
     title_text: str | None = None     # burned lower-third (optional)
     font_path: str | None = None
     crf: int = 20                     # quality; lower = better
+    # When set, stretch the frame sequence to exactly this many seconds by
+    # deriving the input frame rate (frame_count / target). Used to match the
+    # video length to the narration length so nothing is cut short (§24).
+    target_duration: float | None = None
 
 
 def _resolve_font(spec: AssembleSpec) -> str | None:
@@ -45,6 +49,25 @@ def _resolve_font(spec: AssembleSpec) -> str | None:
         if Path(c).exists():
             return c
     return None
+
+
+def count_frames(frames_dir: str | Path, frames_glob: str) -> int:
+    """Count frame files matching an ffmpeg numeric pattern (frame_%05d.png)."""
+    import re
+
+    # Turn "frame_%05d.png" into a shell glob "frame_*.png".
+    glob = re.sub(r"%\d*d", "*", frames_glob)
+    return len(list(Path(frames_dir).glob(glob)))
+
+
+def input_framerate(spec: AssembleSpec) -> float:
+    """The input frame rate to feed ffmpeg: the configured fps, or — when a
+    target duration is set — one that spreads all frames across that duration."""
+    if spec.target_duration and spec.target_duration > 0:
+        n = count_frames(spec.frames_dir, spec.frames_glob)
+        if n > 0:
+            return round(n / spec.target_duration, 6)
+    return float(spec.fps)
 
 
 def assemble_from_frames(
@@ -62,7 +85,7 @@ def assemble_from_frames(
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     pattern = str(Path(spec.frames_dir) / spec.frames_glob)
-    args: list[str] = ["-framerate", str(spec.fps), "-i", pattern]
+    args: list[str] = ["-framerate", str(input_framerate(spec)), "-i", pattern]
 
     # Audio: real track, or a generated silent one so the file always has audio.
     if spec.audio_path and Path(spec.audio_path).exists():

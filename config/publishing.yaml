@@ -1,4 +1,7 @@
 # Publisher (§28). Never default to fully-automatic public upload.
+# For hands-off operation set mode: scheduled — PASS videos are uploaded PRIVATE
+# with a future publishAt (予約投稿). YouTube flips them public at that time; a
+# human can still cancel before then. FAIL is never uploaded; WARN stays private.
 mode: local_only
 allowed_modes:
   - local_only
@@ -7,6 +10,21 @@ allowed_modes:
   - scheduled
 
 steam_url: "https://store.steampowered.com/app/4891620/GEKOKUJO_Vagrant_Crown/"
+
+# YouTube Data API v3 OAuth (free tier, no monthly fee §9). Create an OAuth
+# client in Google Cloud, download the JSON, and point client_secret_path at it.
+# The token is created on first run and reused unattended thereafter.
+youtube:
+  client_secret_path: "config/youtube_client_secret.json"
+  token_path: "config/youtube_token.json"
+  default_tags: ["GEKOKUJO", "Vagrant Crown", "indie game", "living world rpg"]
+
+# Scheduling (予約投稿). When mode: scheduled and no explicit --publish-at is
+# given, the next slot is the next occurrence of `time_utc` at least
+# `min_lead_hours` from now, skipping days that already have a publish.
+schedule:
+  time_utc: "10:00"        # ~19:00 JST
+  min_lead_hours: 12
 
 # Recommended cadence guards (§12). Enforced by the scheduler in Phase 5.
 cadence:

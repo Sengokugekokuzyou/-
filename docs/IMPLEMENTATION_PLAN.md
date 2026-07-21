@@ -21,12 +21,21 @@ Done:
 
 Remaining for a fully finished normal video:
 - [x] VOICEVOX TTS adapter (`TTSProvider` → `VoicevoxProvider`, + `MockProvider`)
-      — calm documentary voice (§22). Pluggable; narration muxed into the render.
+      — calm voice, 冥鳴ひまり (§22). Pluggable; narration muxed into the render.
 - [x] Subtitle generation (SRT) from narration timing, JA (§23). ASS / burn-in /
       EN next.
-- [ ] Drive video length from narration length (hold/loop frames to match).
-- [ ] Real strategic-map frame capture scene (replace placeholder frames).
-- [ ] Description / pinned-comment / Steam-news packaging (§25).
+- [x] Drive video length from narration length (input framerate stretch, §24).
+- [x] Real strategic-map frame capture scene (game repo: `strategic_video_capture`)
+      — pending in-engine run on the game machine.
+- [x] Packaging: titles JA/EN, description, chapters, thumbnail text, pinned
+      comment, Steam news, X post (§25).
+
+## Phase 5 (started early per full-automation request) — Publish
+- [x] Publisher: local manifest + YouTube private/unlisted/scheduled (§28).
+- [x] Orchestrator: `gcl auto` = produce → gate → publish; `gcl publish` for a
+      finished job. Scheduled (予約投稿) computes the next slot; PASS-gated.
+- [ ] OAuth first-run on the game machine (docs/YOUTUBE_WORKFLOW.md).
+- [ ] Analytics import + learner (§29) — tunes packaging only, never the game.
 
 ## Phase 2 — BGM MV (EA-gated for 3D footage)
 - BGM metadata loader (`content/bgm_tracks/*.yaml` — sample present).
