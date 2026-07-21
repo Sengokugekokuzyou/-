@@ -1,0 +1,33 @@
+# Sample experiment definition (§18). Templates + constraints, not free LLM.
+experiment:
+  id: food_shortage_glen_01
+  question_ja: 食料を失った村で、ひとりの農民はどう変わるのか
+  question_en: How Does One Farmer Change When the Village Runs Out of Food?
+  seed_count: 5
+  duration_days: 7          # 検証動画C: small 7-day experiment (§31)
+  region: north_forest
+
+  variables:
+    initial_population: [30, 50, 80]
+    food_stock: 0
+    winter_enabled: false
+    bandit_pressure: normal
+
+  success_conditions:
+    - village_survived
+    - population_above: 20
+  failure_conditions:
+    - village_abandoned
+    - population_below: 5
+
+  focus_roles:
+    - farmer
+    - merchant
+    - village_chief
+
+  # What the scorer/detector should weight for this experiment (§18 evaluation).
+  evaluate:
+    - causality
+    - transformation
+    - npc_story
+    - visuality

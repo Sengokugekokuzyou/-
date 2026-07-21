@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gekokujo-content-lab"
+version = "0.1.0"
+description = "Simulate many GEKOKUJO worlds, detect the few events worth publishing, and turn them into fact-based videos and BGM MVs."
+requires-python = ">=3.10"
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+# Bundled ffmpeg so no system install / no paid service is required (§9).
+ffmpeg = ["imageio-ffmpeg>=0.5"]
+# Dev-only: placeholder frame generation + tests.
+dev = ["Pillow>=10.0", "pytest>=7.0"]
+
+[project.scripts]
+gcl = "gcl.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

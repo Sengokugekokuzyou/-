@@ -1,0 +1,27 @@
+# Publisher (§28). Never default to fully-automatic public upload.
+mode: local_only
+allowed_modes:
+  - local_only
+  - private
+  - unlisted
+  - scheduled
+
+steam_url: "https://store.steampowered.com/app/4891620/GEKOKUJO_Vagrant_Crown/"
+
+# Recommended cadence guards (§12). Enforced by the scheduler in Phase 5.
+cadence:
+  normal_video_per_week: 1
+  shorts_per_week: 3
+  bgm_mv_per_month: 2
+  long_bgm_per_month: 1
+  world_history_per_month: 1
+# No two publishes on the same calendar day (§12).
+prevent_same_day_publish: true
+
+playlists:
+  world_experiments: "GEKOKUJO World Experiments"
+  npc_stories: "GEKOKUJO NPC Stories"
+  world_history: "GEKOKUJO World History"
+  ost: "GEKOKUJO Original Soundtrack"
+  relaxing: "GEKOKUJO Relaxing Fantasy Music"
+  devlog: "GEKOKUJO Development Updates"

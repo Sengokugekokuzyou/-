@@ -1,0 +1,10 @@
+# Quality Gate thresholds (§27). WARN is exported privately with a report;
+# FAIL is never published.
+min_width: 1920
+min_height: 1080
+min_duration_seconds: 3      # test/short mode; raise to ~480 for a real long-form
+require_audio: true
+
+# Anti-repetition (§2-6, §27). Enforced across recent uploads.
+max_title_format_repeat: 1
+max_similarity_to_previous: 0.7

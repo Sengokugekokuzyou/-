@@ -1,0 +1,22 @@
+# Sample BGM metadata (§10). Auto-analysis (bpm/intensity) may fill these, but
+# manual values always win (§10 "自動解析結果は手動設定で上書きできる").
+track:
+  id: northern_forest_theme
+  title_ja: 北方森林の旅
+  title_en: Journey Through the Northern Forest
+  file: audio/bgm/northern_forest_theme.wav
+  duration_seconds: 214
+  bpm: 78
+  # Rights must be confirmed before any BGM MV is published (§27, §33).
+  rights: { status: owned, confirmed: true, note: "Shirokuro Games original" }
+  mood: [calm, nostalgic, adventurous]
+  intensity_curve:
+    - { time: 0,   value: 0.2 }   # Intro
+    - { time: 48,  value: 0.5 }   # Verse
+    - { time: 112, value: 0.8 }   # Peak
+    - { time: 180, value: 0.4 }   # Outro
+  suitable_locations: [northern_forest, river_road, village_outskirts]
+  suitable_times: [morning, sunset]
+  suitable_weather: [clear, light_cloud]
+  preferred_subjects: [protagonist, wolf_companion]
+  video_modes: [official_mv, scenic_journey, ambient]
