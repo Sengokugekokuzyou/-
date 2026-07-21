@@ -73,6 +73,29 @@ def cmd_doctor(args) -> int:
                   "tts.provider: mock for offline)")
     except Exception as e:  # noqa: BLE001
         print(f"  [!!] tts: {e}")
+    # Publisher readiness (§28) — checks without uploading anything.
+    try:
+        mode = cfgmod.get(cfg, "publishing.mode", "local_only")
+        from .publishing.youtube import YouTubePublisher
+        cs = cfgmod.resolve_path(cfgmod.get(
+            cfg, "publishing.youtube.client_secret_path",
+            "config/youtube_client_secret.json"))
+        tok = cfgmod.resolve_path(cfgmod.get(
+            cfg, "publishing.youtube.token_path", "config/youtube_token.json"))
+        libs = YouTubePublisher._libs_available()
+        print(f"  [ok] publish mode: {mode}")
+        libs_msg = "installed" if libs else (
+            "not installed (pip install google-api-python-client "
+            "google-auth-oauthlib)")
+        print(f"  [{'ok' if libs else '--'}] youtube libs: {libs_msg}")
+        cs_msg = str(cs) if cs.exists() else f"missing ({cs})"
+        print(f"  [{'ok' if cs.exists() else '--'}] oauth client secret: {cs_msg}")
+        tok_msg = "cached" if tok.exists() else "not yet (created on first upload)"
+        print(f"  [{'ok' if tok.exists() else '--'}] oauth token: {tok_msg}")
+        if mode in ("private", "unlisted", "scheduled") and not (libs and cs.exists()):
+            print("         → mode needs YouTube setup; see docs/YOUTUBE_WORKFLOW.md")
+    except Exception as e:  # noqa: BLE001
+        print(f"  [!!] publish: {e}")
     return 0
 
 
