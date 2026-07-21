@@ -42,6 +42,19 @@ code.
 | `prevent_same_day_publish` | true | No two publishes same day (§12). |
 | `playlists.*` | see file | Series → playlist names. |
 
+## config/tts.yaml (§22)
+| Key | Default | Meaning |
+|---|---|---|
+| `provider` | voicevox | `voicevox` (local engine) or `mock` (offline/silent). |
+| `host` | `http://127.0.0.1:50021` | VOICEVOX engine URL. |
+| `timeout_seconds` | 30 | HTTP timeout. |
+| `speaker` | 3 | VOICEVOX speaker/style id (pick a calm one). |
+| `speed` | 0.95 | speedScale (slightly slower). |
+| `intonation` | 0.9 | intonationScale (flatter = calmer). |
+| `gap_seconds` | 0.15 | Silence between script lines. |
+| `narrate_bgm_mv` | false | BGM MVs get no narration (§22). |
+| `credit` | VOICEVOX | Credit line appended to descriptions. |
+
 ## Overriding on the Windows production machine
 Typical changes: set `paths.ffmpeg` to the real ffmpeg.exe, `paths.font` to a
 bundled JP font, and raise `quality_gate.min_duration_seconds` for real long-form.

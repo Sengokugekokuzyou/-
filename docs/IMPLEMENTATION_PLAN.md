@@ -20,9 +20,11 @@ Done:
 - CLI `doctor` / `score` / `render`; unit tests; a real MP4 renders end-to-end.
 
 Remaining for a fully finished normal video:
-- [ ] VOICEVOX TTS adapter (`TTSProvider` → `VoicevoxProvider`) — calm
-      documentary voice (§22).
-- [ ] Subtitle generation (SRT/ASS + burn-in) JA/EN (§23).
+- [x] VOICEVOX TTS adapter (`TTSProvider` → `VoicevoxProvider`, + `MockProvider`)
+      — calm documentary voice (§22). Pluggable; narration muxed into the render.
+- [x] Subtitle generation (SRT) from narration timing, JA (§23). ASS / burn-in /
+      EN next.
+- [ ] Drive video length from narration length (hold/loop frames to match).
 - [ ] Real strategic-map frame capture scene (replace placeholder frames).
 - [ ] Description / pinned-comment / Steam-news packaging (§25).
 

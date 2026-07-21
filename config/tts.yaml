@@ -1,0 +1,19 @@
+# TTS settings (§22). Local, free, no monthly fee (§9).
+# provider: voicevox (local engine) | mock (offline, silent — dev/test only)
+provider: voicevox
+host: "http://127.0.0.1:50021"
+timeout_seconds: 30
+
+# Calm game-documentary voice, not high-energy YouTuber (§22).
+# speaker: VOICEVOX speaker/style id. Run `gcl tts --list-speakers` (planned) or
+# check the VOICEVOX app to pick one; this is a placeholder default.
+speaker: 3
+speed: 0.95          # slightly slower
+intonation: 0.9      # flatter = calmer
+gap_seconds: 0.15    # silence between script lines
+
+# BGM MVs get no narration (§22).
+narrate_bgm_mv: false
+
+# Credit line required by VOICEVOX terms; appended to descriptions.
+credit: "VOICEVOX"

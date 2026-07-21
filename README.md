@@ -42,10 +42,26 @@ python -m gcl.cli render \
   --experiment content/experiments/food_shortage_glen.yaml \
   --telemetry  workspace/telemetry/sample_north_forest.jsonl \
   --frames     workspace/raw_capture/demo_frames
-# → workspace/renders/<job_id>/video.mp4 + report.json
+# → workspace/renders/<job_id>/{video.mp4, narration.wav, subtitles.ja.srt, report.json}
 ```
 
 `--dry-run` prints the FFmpeg command without executing (§32).
+
+### Narration (VOICEVOX, §22)
+
+With the local VOICEVOX app running (`http://127.0.0.1:50021`), `render` narrates
+automatically. Test it directly:
+
+```bash
+python -m gcl.cli doctor          # shows whether VOICEVOX is reachable
+python -m gcl.cli tts \
+  --telemetry workspace/telemetry/sample_north_forest.jsonl \
+  --experiment content/experiments/food_shortage_glen.yaml \
+  --speaker 3 --out workspace/audio/narration.wav
+```
+
+Offline (no engine): add `--tts-provider mock` / `--provider mock`. See
+[`docs/TTS_SUBTITLES.md`](docs/TTS_SUBTITLES.md).
 
 ## Layout
 
@@ -67,6 +83,7 @@ python -m gcl.cli render \
   **already** provides vs. what GCL adds
 - [`docs/IMPLEMENTATION_PLAN.md`](docs/IMPLEMENTATION_PLAN.md) — phased plan
 - [`docs/EVENT_SCHEMA.md`](docs/EVENT_SCHEMA.md) — telemetry contract (§15)
+- [`docs/TTS_SUBTITLES.md`](docs/TTS_SUBTITLES.md) — VOICEVOX narration & subtitles (§22, §23)
 - [`docs/GODOT_INTEGRATION.md`](docs/GODOT_INTEGRATION.md) — how the game and GCL talk
 - [`docs/REPLAY_DESIGN.md`](docs/REPLAY_DESIGN.md) — re-shoot strategy (§17)
 - [`docs/BGM_MV_SPEC.md`](docs/BGM_MV_SPEC.md) — BGM music video pipeline (§8–11)

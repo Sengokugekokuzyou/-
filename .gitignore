@@ -9,6 +9,7 @@ venv/
 # Workspace: regeneratable / large artifacts are not committed.
 workspace/renders/
 workspace/raw_capture/
+workspace/audio/
 # Keep the checked-in samples:
 !workspace/telemetry/
 !workspace/reports/
