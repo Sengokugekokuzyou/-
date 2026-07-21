@@ -1,0 +1,44 @@
+[
+  {
+    "candidate": "world_experiment:world [12 events / 6d / 3 locations]",
+    "total": 86.3,
+    "tier": "long_form",
+    "parts": {
+      "causality": 17.0,
+      "transformation": 15.0,
+      "uncertainty": 9.0,
+      "emotion": 15.0,
+      "visuality": 11.1,
+      "game_appeal": 10,
+      "originality": 9.2
+    }
+  },
+  {
+    "candidate": "npc_chronicle:npc_0042 [5 events / 4d / 2 locations]",
+    "total": 82.1,
+    "tier": "shorts",
+    "parts": {
+      "causality": 18.0,
+      "transformation": 15.0,
+      "uncertainty": 7.5,
+      "emotion": 15.0,
+      "visuality": 11.4,
+      "game_appeal": 6,
+      "originality": 9.2
+    }
+  },
+  {
+    "candidate": "npc_chronicle:protagonist [4 events / 1d / 2 locations]",
+    "total": 71.0,
+    "tier": "shorts",
+    "parts": {
+      "causality": 13.0,
+      "transformation": 8.0,
+      "uncertainty": 6.0,
+      "emotion": 15.0,
+      "visuality": 11.8,
+      "game_appeal": 8,
+      "originality": 9.2
+    }
+  }
+]

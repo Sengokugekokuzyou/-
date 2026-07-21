@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Workspace: regeneratable / large artifacts are not committed.
+workspace/renders/
+workspace/raw_capture/
+workspace/audio/
+# Keep the checked-in samples:
+!workspace/telemetry/
+!workspace/reports/
+
+# Secrets — never commit OAuth credentials/tokens.
+config/*client_secret*.json
+config/*token*.json
+
+# OS
+.DS_Store
+Thumbs.db

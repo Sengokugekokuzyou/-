@@ -1,0 +1,13 @@
+# GCL core settings. No absolute paths (§32).
+channel_name: Shirokuro Games
+game_name: "GEKOKUJO: Vagrant Crown"
+steam_url: "https://store.steampowered.com/app/4891620/GEKOKUJO_Vagrant_Crown/"
+
+# Default render target (§27 technical checks compare against these).
+width: 1920
+height: 1080
+fps: 30
+frames_glob: "frame_%05d.png"
+
+# Documentary-toned narration, not high-energy YouTuber (§22).
+narration_style: calm_documentary

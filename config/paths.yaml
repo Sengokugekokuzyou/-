@@ -1,0 +1,16 @@
+# Path layout. Relative paths resolve from the project root; override with
+# absolute paths on the production machine if needed (§32).
+workspace: workspace
+telemetry: workspace/telemetry
+raw_capture: workspace/raw_capture
+renders: workspace/renders
+reports: workspace/reports
+
+# Leave blank to auto-discover (PATH, then the imageio-ffmpeg bundled binary).
+# On the Windows box, point this at the real install, e.g.:
+#   ffmpeg: "C:/ffmpeg/bin/ffmpeg.exe"
+ffmpeg: ""
+ffprobe: ""
+
+# Japanese-capable font for burned-in titles. Blank = auto-discover.
+font: ""

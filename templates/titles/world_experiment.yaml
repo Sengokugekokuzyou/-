@@ -1,0 +1,32 @@
+# Title templates for World Experiments (§5, §25).
+# Six formats are rotated so the same shape is never used twice in a row (§2-6).
+# Placeholders are filled ONLY from recorded facts (never invented, §25).
+#   {location} {days} {who} {peak_label} {question}
+formats:
+  question:
+    - "{question}"
+    - "{location}はこの後どうなるのか？"
+  result:
+    - "{location}で起きたことの結末"
+    - "記録が示した{location}の顛末"
+  time:
+    - "{location}の{days}日間"
+    - "{days}日で変わった{location}"
+  person:
+    - "ある村人の記録"
+    - "{who}に起きたこと"
+  conflict:
+    - "{location}を揺るがした対立の記録"
+    - "{location}で何が争いを生んだのか"
+  change:
+    - "{location}はどう変わったのか"
+    - "{days}日間の変化を追う"
+
+# English variants (§25: 10 EN titles). Same rotation.
+formats_en:
+  question:
+    - "{question_en}"
+  time:
+    - "{days} Days in {location}"
+  result:
+    - "How It Ended in {location}"
