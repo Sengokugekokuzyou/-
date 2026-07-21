@@ -32,20 +32,38 @@ set GCL_TELEMETRY=1
 run_soak_map.bat 200
 ```
 
-## 2. Frame capture (to extend)
+## 2. Frame capture (implemented for the strategic map)
 
-Today `strategic_capture.tscn` writes stills (overview/mid/near). For video, GCL
-needs a **numbered frame sequence** (`frame_%05d.png`) or a recorded clip. Two
-options, cheapest first:
+`strategic_capture.tscn` writes stills; the new **`strategic_video_capture.tscn`**
+(script `scripts/tools/StrategicVideoCapture.gd`, launcher `capture_video.bat`)
+writes a **numbered frame sequence** (`frame_%05d.png`) — exactly what GCL's
+assembler consumes. It reuses the still-capture's non-destructive setup (guards
+off at runtime only, SafeMode lightweight, lights/env untouched) and adds a slow
+cinematic push-in (overview → mid) with the hero+wolf proxies, so the footage
+reads as the real軍略マップ, not a debug view. Calm move, no fast cuts (§11).
 
-1. **Frame-dump loop** — a capture scene that advances the sim by a fixed dt and
-   calls `get_viewport().get_texture().get_image().save_png()` each step. Fully
-   deterministic, resolution-controlled, headless-friendly. Recommended first.
-2. **Godot Movie Maker mode** (`--write-movie`) — records the running scene to
-   frames/audio at a fixed FPS. Good for real-time third-person capture in EA.
+Run it (on the game machine):
 
-GCL consumes either: point `--frames` at the output directory. `tools/make_placeholder_frames.py`
-emulates option 1 until the capture scene exists.
+```bat
+capture_video.bat 300           :: 300 frames (~10s) → C:\Godot\capture\video
+set GEKO_CAPTURE_SIM=1           :: optional: let the world sim evolve across frames
+```
+
+It copies frames to `field_screenshots\gcl_video`; point GCL at that dir:
+
+```bash
+python -m gcl.cli render --experiment content/experiments/food_shortage_glen.yaml \
+  --telemetry workspace/telemetry/sample_north_forest.jsonl \
+  --frames <path>/field_screenshots/gcl_video
+```
+
+Env knobs: `GEKO_CAPTURE_OUT`, `GEKO_CAPTURE_FRAMES`, `GEKO_CAPTURE_SETTLE`,
+`GEKO_CAPTURE_SIM`, `GEKO_STRATEGIC_REGION`. `tools/make_placeholder_frames.py`
+still stands in for offline demos.
+
+For Early-Access 3D third-person capture, **Godot Movie Maker mode**
+(`--write-movie`) records the running scene at a fixed FPS — same `--frames`
+contract on the GCL side.
 
 ## 3. Re-simulation / replay (Phase 3)
 
